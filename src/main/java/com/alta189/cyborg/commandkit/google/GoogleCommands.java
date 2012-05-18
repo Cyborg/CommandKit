@@ -71,8 +71,44 @@ public class GoogleCommands {
 				}
 			}
 		}
-		
-		
-		return null;
+
+
+		return "No results found";
+	}
+
+	@Command(name = "googleimage", desc = "Google Search", aliases = {"gis", "gimage", "image"})
+	public String googleimage(CommandSource source, CommandContext context) {
+		if (source.getSource() == CommandSource.Source.USER && (context.getPrefix() == null || !context.getPrefix().equals("."))) {
+			return null;
+		}
+
+		if (context.getArgs() == null || context.getArgs().length < 1) {
+			return "Correct usage is .googleimage <your search here>...";
+		}
+
+		String query = HttpUtil.encode(StringUtils.toString(context.getArgs()));
+
+		if (query == null) {
+			return null;
+		}
+
+		String json = HttpUtil.readURL(imagesUrl + query);
+
+		if (json == null || json.isEmpty()) {
+			return "No results found";
+		}
+
+		GoogleResults results = new Gson().fromJson(json, GoogleResults.class);
+
+		if (results != null) {
+			if (results.getResponseData().getResults() != null) {
+				if (results.getResponseData().getResults().size() >= 1) {
+					GoogleResults.Result result = results.getResponseData().getResults().get(0);
+					return result.getUrl();
+				}
+			}
+		}
+
+		return "No results found";
 	}
 }
