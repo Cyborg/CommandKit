@@ -31,7 +31,7 @@ public class GoogleCommands {
 	public static final String webUrl = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&safe=moderate&q=";
 	public static final String imagesUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&safe=moderate&q=";
 
-	@Command(name = "command", desc = "Google Search", aliases = {"g", "goog", "search"})
+	@Command(name = "google", desc = "Google Search", aliases = {"g", "goog", "search"})
 	public String google(CommandSource source, CommandContext context) {
 		if (source.getSource() == CommandSource.Source.USER && (context.getPrefix() == null || !context.getPrefix().equals("."))) {
 			return null;
