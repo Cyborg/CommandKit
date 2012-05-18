@@ -18,7 +18,9 @@
  */
 package com.alta189.cyborg.commandkit;
 
+import com.alta189.cyborg.api.command.annotation.EmptyConstructorInjector;
 import com.alta189.cyborg.api.plugin.CommonPlugin;
+import com.alta189.cyborg.commandkit.google.GoogleCommands;
 import java.util.logging.Level;
 
 public class CommandKit extends CommonPlugin {
@@ -26,6 +28,8 @@ public class CommandKit extends CommonPlugin {
 	public void onEnable() {
 		getLogger().log(Level.INFO, "Enabling...");
 
+		getCyborg().getCommandManager().registerCommands(this, GoogleCommands.class, new EmptyConstructorInjector());
+		
 		getLogger().log(Level.INFO, "Successfully Enabled!");
 	}
 
