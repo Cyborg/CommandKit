@@ -16,14 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.alta189.cyborg.commandkit;
 
 import com.alta189.cyborg.api.plugin.CommonPlugin;
 import java.util.logging.Level;
 
 public class CommandKit extends CommonPlugin {
-
 	@Override
 	public void onEnable() {
 		getLogger().log(Level.INFO, "Enabling...");
@@ -37,5 +35,4 @@ public class CommandKit extends CommonPlugin {
 
 		getLogger().log(Level.INFO, "Successfully Disabled!");
 	}
-
 }
