@@ -19,7 +19,9 @@
 package com.alta189.cyborg.commandkit.google;
 
 import com.alta189.cyborg.api.command.CommandContext;
+import com.alta189.cyborg.api.command.CommandResult;
 import com.alta189.cyborg.api.command.CommandSource;
+import com.alta189.cyborg.api.command.ReturnType;
 import com.alta189.cyborg.api.command.annotation.Command;
 import com.alta189.cyborg.api.util.StringUtils;
 import com.alta189.cyborg.commandkit.HttpUtil;
@@ -27,18 +29,20 @@ import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.pircbotx.Colors;
 
+import static com.alta189.cyborg.api.command.CommandResultUtil.get;
+
 public class GoogleCommands {
 	public static final String webUrl = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&safe=moderate&q=";
 	public static final String imagesUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&safe=moderate&q=";
 
 	@Command(name = "google", desc = "Google Search", aliases = {"g", "goog", "search"})
-	public String google(CommandSource source, CommandContext context) {
+	public CommandResult google(CommandSource source, CommandContext context) {
 		if (source.getSource() == CommandSource.Source.USER && (context.getPrefix() == null || !context.getPrefix().equals("."))) {
 			return null;
 		}
 		
 		if (context.getArgs() == null || context.getArgs().length < 1) {
-			return "Correct usage is .google <your search here>...";
+			return get(ReturnType.MESSAGE, "Correct usage is .google <your search here>...", source, context);
 		}
 		
 		String query = HttpUtil.encode(StringUtils.toString(context.getArgs()));
@@ -50,7 +54,7 @@ public class GoogleCommands {
 		String json = HttpUtil.readURL(webUrl + query);
 		
 		if (json == null || json.isEmpty()) {
-			return "No results found";
+			return get(ReturnType.MESSAGE, "No results found", source, context);
 		}
 		
 		GoogleResults results = new Gson().fromJson(json, GoogleResults.class);
@@ -67,23 +71,22 @@ public class GoogleCommands {
 							.append(Colors.NORMAL)
 							.append(": ")
 							.append(Jsoup.parse(result.getContent()).text());
-					return builder.toString();
+					return get(ReturnType.MESSAGE, builder.toString(), source, context);
 				}
 			}
 		}
 
-
-		return "No results found";
+		return get(ReturnType.NOTICE, "No results found", source, context);
 	}
 
-	@Command(name = "googleimage", desc = "Google Search", aliases = {"gis", "gimage", "image"})
-	public String googleimage(CommandSource source, CommandContext context) {
+	@Command(name = "googleimage", desc = "Google Immage Search", aliases = {"gis", "gimage", "image"})
+	public CommandResult googleimage(CommandSource source, CommandContext context) {
 		if (source.getSource() == CommandSource.Source.USER && (context.getPrefix() == null || !context.getPrefix().equals("."))) {
 			return null;
 		}
 
 		if (context.getArgs() == null || context.getArgs().length < 1) {
-			return "Correct usage is .googleimage <your search here>...";
+			return get(ReturnType.MESSAGE, "Correct usage is .googleimage <your search here>...", source, context);
 		}
 
 		String query = HttpUtil.encode(StringUtils.toString(context.getArgs()));
@@ -95,7 +98,7 @@ public class GoogleCommands {
 		String json = HttpUtil.readURL(imagesUrl + query);
 
 		if (json == null || json.isEmpty()) {
-			return "No results found";
+			return get(ReturnType.MESSAGE, "No results found", source, context);
 		}
 
 		GoogleResults results = new Gson().fromJson(json, GoogleResults.class);
@@ -104,11 +107,11 @@ public class GoogleCommands {
 			if (results.getResponseData().getResults() != null) {
 				if (results.getResponseData().getResults().size() >= 1) {
 					GoogleResults.Result result = results.getResponseData().getResults().get(0);
-					return result.getUrl();
+					return get(ReturnType.MESSAGE, result.getUrl(), source, context);
 				}
 			}
 		}
 
-		return "No results found";
+		return get(ReturnType.MESSAGE, "No results found", source, context);
 	}
 }
