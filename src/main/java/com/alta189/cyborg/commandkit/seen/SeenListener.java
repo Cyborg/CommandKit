@@ -16,29 +16,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.alta189.cyborg.commandkit.seen;
 
+import com.alta189.cyborg.api.event.EventHandler;
 import com.alta189.cyborg.api.event.Listener;
+import com.alta189.cyborg.api.event.Order;
 import com.alta189.cyborg.api.event.channel.MessageEvent;
 import org.pircbotx.Colors;
 
 import static com.alta189.cyborg.commandkit.CommandKit.getDatabase;
 
 public class SeenListener implements Listener {
+	@EventHandler(order = Order.LATEST_IGNORE_CANCEL)
+	public static void onMessage(MessageEvent event) {
+		SeenEntry entry = getDatabase().select(SeenEntry.class).where().equal("name", event.getUser().getNick().toLowerCase()).and().equal("channel", event.getChannel().getName().toLowerCase()).execute().findOne();
+		if (entry == null) {
+			entry = new SeenEntry();
+			entry.set(event.getUser());
+			entry.setChannel(event.getChannel().getName().toLowerCase());
+		}
 
-	   public static void onMessage(MessageEvent event) {
-		   SeenEntry entry = getDatabase().select(SeenEntry.class).where().equal("name", event.getUser().getNick().toLowerCase()).and().equal("channel", event.getChannel().getName().toLowerCase()).execute().findOne();
-		   if (entry == null) {
-			   entry = new SeenEntry();
-			   entry.set(event.getUser());
-			   entry.setChannel(event.getChannel().getName().toLowerCase());
-		   }
-		   
-		   entry.setSaying(Colors.removeFormattingAndColors(event.getMessage()));
-		   entry.setTimestamp(event.getTimestamp());
+		entry.setSaying(Colors.removeFormattingAndColors(event.getMessage()));
+		entry.setTimestamp(event.getTimestamp());
 
-		   getDatabase().save(SeenEntry.class, entry);
-	   }
-
+		getDatabase().save(SeenEntry.class, entry);
+	}
 }
