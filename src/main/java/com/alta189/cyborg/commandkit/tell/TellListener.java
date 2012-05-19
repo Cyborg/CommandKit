@@ -31,9 +31,9 @@ public class TellListener implements Listener {
 
 	@EventHandler
 	public synchronized void onMessage(MessageEvent event) {
-		List<TellEntry> entries = getDatabase().select(TellEntry.class).where().equal("recipient", event.getUser().getNick()).and().equal("alerted", false).and().equal("read", false).execute().find();
+		List<TellEntry> entries = getDatabase().select(TellEntry.class).where().equal("receiver", event.getUser().getNick()).and().equal("alerted", false).and().equal("received", false).execute().find();
 		if (entries.size() > 1) {
-			entries = getDatabase().select(TellEntry.class).where().equal("recipient", event.getUser().getNick()).and().equal("read", false).execute().find();
+			entries = getDatabase().select(TellEntry.class).where().equal("receiver", event.getUser().getNick()).and().equal("received", false).execute().find();
 			Cyborg.getInstance().sendNotice(event.getUser(), "You have '" + entries.size() + "' unread tells. Type .showtells to see them");
 			for (TellEntry entry : entries) {
 				entry.setAlerted(true);
@@ -48,7 +48,7 @@ public class TellListener implements Listener {
 			Cyborg.getInstance().sendNotice(event.getUser(), builder.toString());
 			
 			entry.setAlerted(true);
-			entry.setRead(true);
+			entry.setReceived(true);
 			getDatabase().save(TellEntry.class, entry);
 		}
 	}

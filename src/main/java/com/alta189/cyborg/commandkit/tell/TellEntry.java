@@ -32,7 +32,7 @@ public class TellEntry {
 	private int id;
 
 	@Field
-	private String recipient;
+	private String receiver;
 
 	@Field
 	private String sender;
@@ -47,7 +47,7 @@ public class TellEntry {
 	private boolean alerted = false;
 
 	@Field
-	private boolean read = false;
+	private boolean received = false;
 
 	// Non-persistent data
 	private static final PeriodFormatter timeFormatter = new PeriodFormatterBuilder()
@@ -64,12 +64,12 @@ public class TellEntry {
 		return id;
 	}
 
-	public String getRecipient() {
-		return recipient;
+	public String getReceiver() {
+		return receiver;
 	}
 
-	public void setRecipient(String recipient) {
-		this.recipient = recipient;
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 
 	public String getSender() {
@@ -104,12 +104,12 @@ public class TellEntry {
 		this.alerted = alerted;
 	}
 
-	public boolean isRead() {
-		return read;
+	public boolean isReceived() {
+		return received;
 	}
 
-	public void setRead(boolean read) {
-		this.read = read;
+	public void setReceived(boolean received) {
+		this.received = received;
 	}
 
 	public String getDifference(long time) {

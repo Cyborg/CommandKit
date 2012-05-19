@@ -49,7 +49,7 @@ public class TellCommands {
 		
 		TellEntry entry = new TellEntry();
 		entry.setSender(source.getUser().getNick());
-		entry.setRecipient(nick.toLowerCase());
+		entry.setReceiver(nick.toLowerCase());
 		entry.setMessage(message);
 		entry.setTimestamp(System.currentTimeMillis());
 		
@@ -67,7 +67,7 @@ public class TellCommands {
 			return null;
 		}
 
-		List<TellEntry> entries = getDatabase().select(TellEntry.class).where().equal("recipient", source.getUser().getNick()).and().equal("alerted", false).and().equal("read", false).execute().find();
+		List<TellEntry> entries = getDatabase().select(TellEntry.class).where().equal("receiver", source.getUser().getNick()).and().equal("alerted", false).and().equal("received", false).execute().find();
 		if (entries.size() < 1) {
 			  return get(ReturnType.NOTICE, "You have no new tells", source, context);
 		}
@@ -80,7 +80,7 @@ public class TellCommands {
 			Cyborg.getInstance().sendNotice(source.getUser(), builder.toString());
 
 			entry.setAlerted(true);
-			entry.setRead(true);
+			entry.setReceived(true);
 			getDatabase().save(TellEntry.class, entry);
 		}
 		return null;
