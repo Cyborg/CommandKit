@@ -67,7 +67,7 @@ public class TellCommands {
 			return null;
 		}
 
-		List<TellEntry> entries = getDatabase().select(TellEntry.class).where().equal("receiver", source.getUser().getNick()).and().equal("alerted", false).and().equal("received", false).execute().find();
+		List<TellEntry> entries = getDatabase().select(TellEntry.class).where().equal("receiver", source.getUser().getNick()).and().equal("received", false).execute().find();
 		if (entries.size() < 1) {
 			  return get(ReturnType.NOTICE, "You have no new tells", source, context);
 		}
