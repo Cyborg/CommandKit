@@ -27,6 +27,7 @@ import com.alta189.cyborg.commandkit.seen.SeenCommands;
 import com.alta189.cyborg.commandkit.seen.SeenEntry;
 import com.alta189.cyborg.commandkit.seen.SeenListener;
 import com.alta189.cyborg.commandkit.tell.TellCommands;
+import com.alta189.cyborg.commandkit.tell.TellEntry;
 import com.alta189.cyborg.commandkit.tell.TellListener;
 import com.alta189.simplesave.Database;
 import com.alta189.simplesave.DatabaseFactory;
@@ -62,6 +63,7 @@ public class CommandKit extends CommonPlugin {
 		
 		try {
 			db.registerTable(SeenEntry.class);
+			db.registerTable(TellEntry.class);
 		} catch (TableRegistrationException e) {
 			e.printStackTrace();
 		}
