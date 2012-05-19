@@ -51,13 +51,13 @@ public class SeenEntry {
 	
 	// Non-persistent data
 	private static final PeriodFormatter timeFormatter = new PeriodFormatterBuilder()
-			.appendYears().appendSuffix("years ").appendSeparator(", ")
-			.appendMonths().appendSuffix("months ").appendSeparator(", ")
-			.appendWeeks().appendSuffix("weeks ").appendSeparator(", ")
-			.appendDays().appendSuffix("days ").appendSeparator(", ")
-			.appendHours().appendSuffix("hours ").appendSeparator(", ")
-			.appendMinutes().appendSuffix("minutes ").appendSeparator(", ")
-			.appendSeconds().appendSuffix("seconds ")
+			.appendYears().appendSuffix(" years").appendSeparator(", ")
+			.appendMonths().appendSuffix(" months").appendSeparator(", ")
+			.appendWeeks().appendSuffix(" weeks").appendSeparator(", ")
+			.appendDays().appendSuffix(" days").appendSeparator(", ")
+			.appendHours().appendSuffix(" hours").appendSeparator(", ")
+			.appendMinutes().appendSuffix(" minutes").appendSeparator(", ")
+			.appendSeconds().appendSuffix(" seconds")
 			.toFormatter();
 	
 	public int getId() {
