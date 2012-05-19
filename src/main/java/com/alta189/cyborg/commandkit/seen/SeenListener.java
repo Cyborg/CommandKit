@@ -27,7 +27,7 @@ import org.pircbotx.Colors;
 import static com.alta189.cyborg.commandkit.CommandKit.getDatabase;
 
 public class SeenListener implements Listener {
-	@EventHandler(order = Order.LATEST_IGNORE_CANCEL)
+	@EventHandler(order = Order.MONITOR)
 	public static void onMessage(MessageEvent event) {
 		SeenEntry entry = getDatabase().select(SeenEntry.class).where().equal("name", event.getUser().getNick().toLowerCase()).and().equal("channel", event.getChannel().getName().toLowerCase()).execute().findOne();
 		if (entry == null) {
