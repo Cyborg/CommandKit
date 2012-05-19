@@ -26,6 +26,8 @@ import com.alta189.cyborg.commandkit.google.GoogleCommands;
 import com.alta189.cyborg.commandkit.seen.SeenCommands;
 import com.alta189.cyborg.commandkit.seen.SeenEntry;
 import com.alta189.cyborg.commandkit.seen.SeenListener;
+import com.alta189.cyborg.commandkit.tell.TellCommands;
+import com.alta189.cyborg.commandkit.tell.TellListener;
 import com.alta189.simplesave.Database;
 import com.alta189.simplesave.DatabaseFactory;
 import com.alta189.simplesave.exceptions.ConnectionException;
@@ -72,10 +74,12 @@ public class CommandKit extends CommonPlugin {
 
 		// Register Listeners
 		getCyborg().getEventManager().registerEvents(new SeenListener(), this);
-		
+		getCyborg().getEventManager().registerEvents(new TellListener(), this);
+
 		// Register Commands
 		getCyborg().getCommandManager().registerCommands(this, GoogleCommands.class, EmptyConstructorInjector.getInstance());
 		getCyborg().getCommandManager().registerCommands(this, SeenCommands.class, EmptyConstructorInjector.getInstance());
+		getCyborg().getCommandManager().registerCommands(this, TellCommands.class, EmptyConstructorInjector.getInstance());
 
 		getLogger().log(Level.INFO, "Successfully Enabled!");
 	}
