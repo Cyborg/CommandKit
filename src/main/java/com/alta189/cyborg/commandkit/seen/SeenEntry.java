@@ -50,7 +50,15 @@ public class SeenEntry {
 	private String saying;
 	
 	// Non-persistent data
-	private static final PeriodFormatter timeFormatter = new PeriodFormatterBuilder().appendPrefix("Years ").appendYears().appendSeparator(", ").appendPrefix("Months ").appendMonths().appendSeparator(", ").appendPrefix("Weeks ").appendWeeks().appendSeparator(", ").appendPrefix("Days ").appendDays().appendSeparator(", ").appendPrefix("Hours ").appendHours().appendSeparator(", ").appendPrefix("Minutes ").appendMinutes().appendSeparator(", ").appendPrefix("Seconds ").appendSeconds().appendSuffix(" ago").toFormatter();
+	private static final PeriodFormatter timeFormatter = new PeriodFormatterBuilder()
+			.appendYears().appendSuffix("years ").appendSeparator(", ")
+			.appendMonths().appendSuffix("months ").appendSeparator(", ")
+			.appendWeeks().appendSuffix("weeks ").appendSeparator(", ")
+			.appendDays().appendSuffix("days ").appendSeparator(", ")
+			.appendHours().appendSuffix("hours ").appendSeparator(", ")
+			.appendMinutes().appendSuffix("minutes ").appendSeparator(", ")
+			.appendSeconds().appendSuffix("seconds ")
+			.toFormatter();
 	
 	public int getId() {
 		return id;
@@ -105,6 +113,6 @@ public class SeenEntry {
 		DateTime begin = new DateTime(time);
 		DateTime end = new DateTime(timestamp);
 		Period period = new Period(end, begin);
-		return timeFormatter.print(period.normalizedStandard());
+		return timeFormatter.print(period.normalizedStandard()) + " ago";
 	}
 }
