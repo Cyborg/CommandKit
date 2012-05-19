@@ -38,8 +38,9 @@ public class SeenCommands {
 		if (context.getPrefix() == null || !context.getPrefix().equals(".")) {
 			return null;
 		}
-		
-		if (context.getLocationType() != CommandContext.LocationType.CHANNEL)
+		if (context.getLocationType() != CommandContext.LocationType.CHANNEL) {
+			return null;
+		}
 
 		if (context.getArgs() == null || context.getArgs().length < 1) {
 			return get(ReturnType.NOTICE, "Correct usage is .seen <nick>", source, context);
