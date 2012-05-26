@@ -23,6 +23,7 @@ import com.alta189.cyborg.api.plugin.CommonPlugin;
 import com.alta189.cyborg.api.util.yaml.YAMLFormat;
 import com.alta189.cyborg.api.util.yaml.YAMLProcessor;
 import com.alta189.cyborg.commandkit.google.GoogleCommands;
+import com.alta189.cyborg.commandkit.hastebin.HastebinCommands;
 import com.alta189.cyborg.commandkit.seen.SeenCommands;
 import com.alta189.cyborg.commandkit.seen.SeenEntry;
 import com.alta189.cyborg.commandkit.seen.SeenListener;
@@ -82,6 +83,7 @@ public class CommandKit extends CommonPlugin {
 		getCyborg().getCommandManager().registerCommands(this, GoogleCommands.class, EmptyConstructorInjector.getInstance());
 		getCyborg().getCommandManager().registerCommands(this, SeenCommands.class, EmptyConstructorInjector.getInstance());
 		getCyborg().getCommandManager().registerCommands(this, TellCommands.class, EmptyConstructorInjector.getInstance());
+		getCyborg().getCommandManager().registerCommands(this, HastebinCommands.class, EmptyConstructorInjector.getInstance());
 
 		getLogger().log(Level.INFO, "Successfully Enabled!");
 	}

@@ -4,6 +4,7 @@ import com.alta189.cyborg.api.command.CommandContext;
 import com.alta189.cyborg.api.command.CommandResult;
 import com.alta189.cyborg.api.command.CommandSource;
 import com.alta189.cyborg.api.command.ReturnType;
+import com.alta189.cyborg.api.command.annotation.Command;
 import com.alta189.cyborg.commandkit.util.HttpUtil;
 
 import java.util.regex.Pattern;
@@ -14,6 +15,7 @@ public class HastebinCommands {
 
 	private static final Pattern urlPattern = Pattern.compile("((https?):((//)|(\\\\\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)");
 
+	@Command(name = "hastebin", desc = "Repastes from ugly paste sites", aliases = {"prettypaste", "hasteit"})
 	public CommandResult hastebin(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
 			return null;
