@@ -49,7 +49,7 @@ public class SeenCommands {
 		String nick = context.getArgs()[0].toLowerCase();
 		SeenEntry entry = getDatabase().select(SeenEntry.class).where().equal("name",nick ).and().equal("channel", context.getLocation()).execute().findOne();
 		if (entry == null) {
-			return get(ReturnType.MESSAGE, "I have never seen '" + nick + "' active in this channel!", source, context);
+			return get(ReturnType.MESSAGE, "I have never seen '" + context.getArgs()[0] + "' active in this channel!", source, context);
 		}
 		StringBuilder builder = new StringBuilder();
 		builder.append(context.getArgs()[0]).append(" was last seen ").append(entry.getDifference(System.currentTimeMillis())).append(" saying: ").append(entry.getSaying());
