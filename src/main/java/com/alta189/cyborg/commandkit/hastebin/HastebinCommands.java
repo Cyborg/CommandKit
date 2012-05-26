@@ -15,7 +15,7 @@ public class HastebinCommands {
 
 	private static final Pattern urlPattern = Pattern.compile("((https?):((//)|(\\\\\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)");
 
-	@Command(name = "hastebin", desc = "Repastes from ugly paste sites", aliases = {"prettypaste", "hasteit"})
+	@Command(name = "hastebin", desc = "Repastes from ugly paste sites", aliases = {"prettypaste", "hasteit", "repaste", "pp"})
 	public CommandResult hastebin(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
 			return null;
