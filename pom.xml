@@ -29,6 +29,12 @@
             <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Shaded Dependencies -->
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-core</artifactId>
+            <version>[2.2,)</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -65,9 +71,28 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <!-- JAR dependency addition plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>org.twitter4j:*</include>
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
-
-    
 </project>
