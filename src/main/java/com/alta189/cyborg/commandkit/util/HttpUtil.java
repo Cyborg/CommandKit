@@ -16,7 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.alta189.cyborg.commandkit;
+package com.alta189.cyborg.commandkit.util;
+
+import com.google.gson.Gson;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,14 +37,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 public class HttpUtil {
-	
+
+	public static final String hastebin = "http://hastebin.com/documents";
+
 	public static String readURL(String url) {
 		HttpGet request = new HttpGet(url);
 		HttpClient httpClient = new DefaultHttpClient();
@@ -58,20 +65,19 @@ public class HttpUtil {
 			while ((line = rd.readLine()) != null) {
 				lines.add(line);
 			}
-			
+
 			if (lines.size() > 1) {
 				int i = randomNumber(0, lines.size() + 1);
 				return lines.get(i);
 			} else if (lines.size() == 1) {
 				return lines.get(0);
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public static String encode(String raw) {
 		String result = null;
 		try {
@@ -92,8 +98,28 @@ public class HttpUtil {
 		return result;
 	}
 
-	private static int randomNumber(int min, int max) {
-		return min + (new Random()).nextInt(max-min);
+	public static String hastebin(String data) {
+		HttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost(hastebin);
+
+		try {
+			post.setEntity(new StringEntity(data));
+
+			HttpResponse response = client.execute(post);
+
+			String result = EntityUtils.toString(response.getEntity());
+			return "http://hastebin.com/" + new Gson().fromJson(result, Hastebin.class).getKey();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
+	private static int randomNumber(int min, int max) {
+		return min + (new Random()).nextInt(max - min);
+	}
 }
