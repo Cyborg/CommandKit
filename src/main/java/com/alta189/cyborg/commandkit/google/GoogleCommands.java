@@ -24,7 +24,7 @@ import com.alta189.cyborg.api.command.CommandSource;
 import com.alta189.cyborg.api.command.ReturnType;
 import com.alta189.cyborg.api.command.annotation.Command;
 import com.alta189.cyborg.api.util.StringUtils;
-import com.alta189.cyborg.commandkit.HttpUtil;
+import com.alta189.cyborg.commandkit.util.HttpUtil;
 import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.pircbotx.Colors;
