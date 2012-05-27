@@ -48,6 +48,7 @@ public class TwitterCommands {
 			.appendMinutes().appendSuffix(" minutes").appendSeparator(", ")
 			.appendSeconds().appendSuffix(" seconds")
 			.toFormatter();
+	private static final String lineBreak = System.getProperty("line.separator");
 	private final String consumerKey;
 	private final String consumerSecret;
 	private final Twitter twitter;
@@ -76,7 +77,7 @@ public class TwitterCommands {
 			status.getUser();
 			StringBuilder builder = new StringBuilder();
 			builder.append(status.getUser().getScreenName()).append(Colors.BLUE).append(": ").append(Colors.NORMAL).append(status.getText()).append(" (").append(timeFormatter.print(new Period(new DateTime(status.getCreatedAt()), new DateTime()))).append(")");
-			return get(ReturnType.MESSAGE, builder.toString(), source, context);
+			return get(ReturnType.MESSAGE, builder.toString().replace(lineBreak, " "), source, context);
 		} catch (TwitterException e) {
 			if (e.getStatusCode() == 404) {
 				return get(ReturnType.NOTICE, "User not found!", source, context);
