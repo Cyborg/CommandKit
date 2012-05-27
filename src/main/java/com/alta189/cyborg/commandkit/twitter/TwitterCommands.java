@@ -70,7 +70,7 @@ public class TwitterCommands {
 		}
 
 		try {
-			List<Status> statusList = twitter.getUserTimeline("alta189");
+			List<Status> statusList = twitter.getUserTimeline(context.getArgs()[0]);
 			Status status = statusList.get(0);
 			status.getUser();
 			StringBuilder builder = new StringBuilder();
