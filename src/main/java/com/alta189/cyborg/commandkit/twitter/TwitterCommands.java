@@ -67,6 +67,9 @@ public class TwitterCommands {
 
 	@Command(name = "twitter", desc = "displays the last tweet of a twitter user", aliases = {"twit"})
 	public CommandResult twitter(CommandSource source, CommandContext context) {
+		if (source.getSource() == CommandSource.Source.USER && (context.getPrefix() == null || !context.getPrefix().equals("."))) {
+			return null;
+		}
 		if (context.getArgs() == null || context.getArgs().length < 1) {
 			return get(ReturnType.NOTICE, "Correct usage is .twitter <user>", source, context);
 		}
