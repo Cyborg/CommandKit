@@ -58,8 +58,8 @@ public class TwitterCommands {
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
-				.setOAuthConsumerKey("TSWAxMy4WyUYriBsAsO7zw")
-				.setOAuthConsumerSecret("HFQa8CjbZSOV9sVT0wgnOzsBIWfnOWmoTprwCX6q0");
+				.setOAuthConsumerKey(consumerKey)
+				.setOAuthConsumerSecret(consumerSecret);
 		twitter = new TwitterFactory(cb.build()).getInstance();
 	}
 

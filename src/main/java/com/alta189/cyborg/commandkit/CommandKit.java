@@ -88,9 +88,7 @@ public class CommandKit extends CommonPlugin {
 		getCyborg().getCommandManager().registerCommands(this, SeenCommands.class, EmptyConstructorInjector.getInstance());
 		getCyborg().getCommandManager().registerCommands(this, TellCommands.class, EmptyConstructorInjector.getInstance());
 		getCyborg().getCommandManager().registerCommands(this, HastebinCommands.class, EmptyConstructorInjector.getInstance());
-		getCyborg().getCommandManager().registerCommands(this, TwitterCommands.class, new SimpleInjector(getConfig().getString("twitter.consumer-key")));
-		getCyborg().getCommandManager().registerCommands(this, TwitterCommands.class, new SimpleInjector(getConfig().getString("twitter.consumer-secret")));
-
+		getCyborg().getCommandManager().registerCommands(this, TwitterCommands.class, new SimpleInjector(getConfig().getString("twitter.consumer-key", "TSWAxMy4WyUYriBsAsO7zw"), getConfig().getString("twitter.consumer-secret", "HFQa8CjbZSOV9sVT0wgnOzsBIWfnOWmoTprwCX6q0")));
 		getLogger().log(Level.INFO, "Successfully Enabled!");
 	}
 
