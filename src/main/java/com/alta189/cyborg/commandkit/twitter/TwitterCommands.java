@@ -76,6 +76,9 @@ public class TwitterCommands {
 
 		try {
 			List<Status> statusList = twitter.getUserTimeline(context.getArgs()[0]);
+			if (statusList == null || statusList.size() < 1) {
+				return get(ReturnType.MESSAGE, "User has no tweets!", source, context);
+			}
 			Status status = statusList.get(0);
 			status.getUser();
 			StringBuilder builder = new StringBuilder();
@@ -86,7 +89,7 @@ public class TwitterCommands {
 				return get(ReturnType.MESSAGE, "User not found!", source, context);
 			} else if (e.getStatusCode() == 401) {
 				return get(ReturnType.MESSAGE, "Access denied by Twitter!", source, context);
-			}else {
+			} else {
 				e.printStackTrace();
 				return get(ReturnType.MESSAGE, "There was an internal error!", source, context);
 			}
