@@ -83,9 +83,9 @@ public class TwitterCommands {
 			return get(ReturnType.MESSAGE, builder.toString().replace(lineBreak, " "), source, context);
 		} catch (TwitterException e) {
 			if (e.getStatusCode() == 404) {
-				return get(ReturnType.NOTICE, "User not found!", source, context);
+				return get(ReturnType.MESSAGE, "User not found!", source, context);
 			} else if (e.getStatusCode() == 401) {
-				return get(ReturnType.NOTICE, "Access denied by Twitter!", source, context);
+				return get(ReturnType.MESSAGE, "Access denied by Twitter!", source, context);
 			}else {
 				e.printStackTrace();
 				return get(ReturnType.MESSAGE, "There was an internal error!", source, context);
