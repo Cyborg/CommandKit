@@ -27,6 +27,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
+import org.pircbotx.Colors;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -74,7 +75,7 @@ public class TwitterCommands {
 			Status status = statusList.get(0);
 			status.getUser();
 			StringBuilder builder = new StringBuilder();
-			builder.append(status.getUser().getName()).append(": ").append(status.getText()).append(" (").append(timeFormatter.print(new Period(new DateTime(status.getCreatedAt()), new DateTime()))).append(")");
+			builder.append(status.getUser().getScreenName()).append(Colors.BLUE).append(": ").append(Colors.NORMAL).append(status.getText()).append(" (").append(timeFormatter.print(new Period(new DateTime(status.getCreatedAt()), new DateTime()))).append(")");
 			return get(ReturnType.MESSAGE, builder.toString(), source, context);
 		} catch (TwitterException e) {
 			if (e.getStatusCode() == 404) {
