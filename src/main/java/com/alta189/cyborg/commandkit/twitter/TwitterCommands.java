@@ -108,7 +108,7 @@ public class TwitterCommands {
 			} else {
 				builder.append(timeFormatter.print(period));
 			}
-			builder.append(")");
+			builder.append(" ago)");
 			return get(ReturnType.MESSAGE, builder.toString().replace(lineBreak, " "), source, context);
 		} catch (TwitterException e) {
 			if (e.getStatusCode() == 404) {
