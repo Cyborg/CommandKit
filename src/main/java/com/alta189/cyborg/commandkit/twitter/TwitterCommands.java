@@ -108,6 +108,7 @@ public class TwitterCommands {
 		}
 	}
 
+	@Command(name = "twituser", desc = "Add your twitter account so you can tweet from IRC")
 	@Usage(".twituser <twitter username>")
 	public CommandResult twituser(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
@@ -157,6 +158,7 @@ public class TwitterCommands {
 		}
 	}
 
+	@Command(name = "twitpin", desc = "Second stage of adding your twitter account")
 	@Usage(".twitpin <pin>")
 	public CommandResult twitpin(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
@@ -203,6 +205,7 @@ public class TwitterCommands {
 		}
 	}
 
+	@Command(name = "tweet", desc = "Updates your twitter status")
 	@Usage(".tweet <status>...")
 	public CommandResult tweet(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
