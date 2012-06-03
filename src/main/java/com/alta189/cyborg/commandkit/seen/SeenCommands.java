@@ -24,6 +24,7 @@ import com.alta189.cyborg.api.command.CommandResult;
 import com.alta189.cyborg.api.command.CommandSource;
 import com.alta189.cyborg.api.command.ReturnType;
 import com.alta189.cyborg.api.command.annotation.Command;
+import com.alta189.cyborg.api.command.annotation.Usage;
 
 import static com.alta189.cyborg.api.command.CommandResultUtil.get;
 import static com.alta189.cyborg.commandkit.CommandKit.getDatabase;
@@ -31,6 +32,7 @@ import static com.alta189.cyborg.commandkit.CommandKit.getDatabase;
 public class SeenCommands {
 
 	@Command(name = "seen", desc = "Command for seeing when someone was last active in a channel")
+	@Usage(".seen <nick>")
 	public CommandResult seen(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
 			return null;

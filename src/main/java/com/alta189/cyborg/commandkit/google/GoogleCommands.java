@@ -23,6 +23,7 @@ import com.alta189.cyborg.api.command.CommandResult;
 import com.alta189.cyborg.api.command.CommandSource;
 import com.alta189.cyborg.api.command.ReturnType;
 import com.alta189.cyborg.api.command.annotation.Command;
+import com.alta189.cyborg.api.command.annotation.Usage;
 import com.alta189.cyborg.api.util.StringUtils;
 import com.alta189.cyborg.commandkit.util.HttpUtil;
 import com.google.gson.Gson;
@@ -35,7 +36,8 @@ public class GoogleCommands {
 	public static final String webUrl = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&safe=moderate&q=";
 	public static final String imagesUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&safe=moderate&q=";
 
-	@Command(name = "google", desc = "Google Search", aliases = {"g", "goog", "search"})
+	@Command(name = "google", desc = "Google Web Search", aliases = {"g", "goog", "search"})
+	@Usage(".google <your search here>...")
 	public CommandResult google(CommandSource source, CommandContext context) {
 		if (source.getSource() == CommandSource.Source.USER && (context.getPrefix() == null || !context.getPrefix().equals("."))) {
 			return null;
@@ -80,6 +82,7 @@ public class GoogleCommands {
 	}
 
 	@Command(name = "googleimage", desc = "Google Immage Search", aliases = {"gis", "gimage", "image"})
+	@Usage(".googleimage <your search here>...")
 	public CommandResult googleimage(CommandSource source, CommandContext context) {
 		if (source.getSource() == CommandSource.Source.USER && (context.getPrefix() == null || !context.getPrefix().equals("."))) {
 			return null;

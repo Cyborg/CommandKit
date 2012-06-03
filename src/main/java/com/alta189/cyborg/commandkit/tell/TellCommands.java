@@ -25,6 +25,7 @@ import com.alta189.cyborg.api.command.CommandResult;
 import com.alta189.cyborg.api.command.CommandSource;
 import com.alta189.cyborg.api.command.ReturnType;
 import com.alta189.cyborg.api.command.annotation.Command;
+import com.alta189.cyborg.api.command.annotation.Usage;
 import com.alta189.cyborg.api.util.StringUtils;
 import java.util.List;
 
@@ -32,7 +33,8 @@ import static com.alta189.cyborg.api.command.CommandResultUtil.get;
 import static com.alta189.cyborg.commandkit.CommandKit.getDatabase;
 
 public class TellCommands {
-	@Command(name = "tell", desc = "Sends a tell to a user")
+	@Command(name = "tell", desc = "Sends a tell to a user the next time they speak in a channel which the bot is in")
+	@Usage(".tell <nick> <message>...")
 	public CommandResult tell(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
 			return null;
@@ -59,6 +61,7 @@ public class TellCommands {
 	}
 
 	@Command(name = "showtells", desc = "Shows a user all their unread tells")
+	@Usage(".showtell")
 	public CommandResult showtells(CommandSource source, CommandContext context) {
 		if (source.getSource() != CommandSource.Source.USER) {
 			return null;
