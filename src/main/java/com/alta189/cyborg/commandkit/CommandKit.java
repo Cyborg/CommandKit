@@ -32,6 +32,7 @@ import com.alta189.cyborg.commandkit.tell.TellCommands;
 import com.alta189.cyborg.commandkit.tell.TellEntry;
 import com.alta189.cyborg.commandkit.tell.TellListener;
 import com.alta189.cyborg.commandkit.twitter.TwitterCommands;
+import com.alta189.cyborg.commandkit.twitter.TwitterUser;
 import com.alta189.simplesave.Database;
 import com.alta189.simplesave.DatabaseFactory;
 import com.alta189.simplesave.exceptions.ConnectionException;
@@ -69,6 +70,7 @@ public class CommandKit extends CommonPlugin {
 		try {
 			db.registerTable(SeenEntry.class);
 			db.registerTable(TellEntry.class);
+			db.registerTable(TwitterUser.class);
 		} catch (TableRegistrationException e) {
 			e.printStackTrace();
 		}
