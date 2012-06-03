@@ -126,7 +126,7 @@ public class TwitterCommands {
 		String username = context.getArgs()[0];
 		CyborgUser permsAccount = getUser(source.getUser());
 
-		if (getUser(source.getUser()) != null) {
+		if (getUser(source.getUser()) == null) {
 			return get(ReturnType.NOTICE, "You have not registered with me! You need to register to add a twitter account! Type .register for help!", source, context);
 		}
 
@@ -176,7 +176,7 @@ public class TwitterCommands {
 		String pin = context.getArgs()[0];
 		CyborgUser permsAccount = getUser(source.getUser());
 
-		if (getUser(source.getUser()) != null) {
+		if (getUser(source.getUser()) == null) {
 			return get(ReturnType.NOTICE, "You have not registered with me! You need to register to add a twitter account! Type .register for help!", source, context);
 		}
 
@@ -222,7 +222,7 @@ public class TwitterCommands {
 
 		CyborgUser permsAccount = getUser(source.getUser());
 
-		if (getUser(source.getUser()) != null) {
+		if (getUser(source.getUser()) == null) {
 			return get(ReturnType.NOTICE, "You have not registered with me! You need to register to use a twitter account! Type .register for help!", source, context);
 		}
 
