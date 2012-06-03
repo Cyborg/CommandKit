@@ -59,7 +59,7 @@ public class TwitterCommands {
 			.appendSeconds().appendSuffix(" seconds")
 			.toFormatter();
 	private static final String lineBreak = System.getProperty("line.separator");
-	private final Map<UserSnapshot, RequestToken> tokenMap = new HashMap<UserSnapshot, RequestToken>();
+	private final Map<String, RequestToken> tokenMap = new HashMap<String, RequestToken>();
 	private final ConfigurationBuilder defaultConfigBuilder = new ConfigurationBuilder();
 	private final TwitterFactory defaultTwitterFactory;
 	private final String consumerKey;
@@ -135,16 +135,14 @@ public class TwitterCommands {
 			return get(ReturnType.NOTICE, "You already have an twitter user associated with your account!", source, context);
 		}
 
-		UserSnapshot userSnapshot = source.getUser().generateSnapshot();
-
-		if (tokenMap.get(userSnapshot) != null) {
+		if (tokenMap.get(permsAccount.getName()) != null) {
 			return get(ReturnType.NOTICE, "You already have twitter OAuth URL! Get your pin and type .twitpin <pin>", source, context);
 		}
 
 		Twitter twitter = defaultTwitterFactory.getInstance();
 		try {
 			RequestToken token = twitter.getOAuthRequestToken();
-			tokenMap.put(userSnapshot, token);
+			tokenMap.put(permsAccount.getName(), token);
 			StringBuilder body = new StringBuilder();
 			body.append("Here is your OAuth Auth URL: ")
 					.append(token.getAuthorizationURL())
@@ -154,6 +152,7 @@ public class TwitterCommands {
 					.append("Execute this command to finish the registration: .twitpin <pin>");
 			return get(ReturnType.NOTICE, body.toString(), source, context);
 		} catch (TwitterException e) {
+			e.printStackTrace();
 			return get(ReturnType.MESSAGE, "Internal Twitter Exception httpcode:" + e.getStatusCode(), source, context);
 		}
 	}
@@ -185,10 +184,9 @@ public class TwitterCommands {
 			return get(ReturnType.NOTICE, "You already have an twitter user associated with your account!", source, context);
 		}
 
-		UserSnapshot userSnapshot = source.getUser().generateSnapshot();
-		RequestToken requestToken = tokenMap.get(userSnapshot);
+		RequestToken requestToken = tokenMap.get(permsAccount.getName());
 		if (requestToken == null) {
-			return get(ReturnType.NOTICE, "You already have twitter OAuth URL! Get your pin and type .twituser <user>", source, context);
+			return get(ReturnType.NOTICE, "You haven't started the process! To start type .twituser <user>", source, context);
 		}
 
 		Twitter twitter = defaultTwitterFactory.getInstance();
@@ -199,8 +197,11 @@ public class TwitterCommands {
 			twitterUser.setAccessTokenObject(accessToken);
 			twitterUser.setPermUser(permsAccount.getName());
 			getDatabase().save(TwitterUser.class, twitterUser);
+			tokenMap.remove(permsAccount.getName());
 			return get(ReturnType.NOTICE, "Twitter account created! You can now use the tweet command!", source, context);
 		} catch (TwitterException e) {
+			tokenMap.remove(permsAccount.getName());
+			e.printStackTrace();
 			return get(ReturnType.MESSAGE, "Internal Twitter Exception http code:" + e.getStatusCode(), source, context);
 		}
 	}
