@@ -28,7 +28,7 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.pircbotx.User;
 
-@Table(name = "seen")
+@Table("seen")
 public class SeenEntry {
 
 	@Id

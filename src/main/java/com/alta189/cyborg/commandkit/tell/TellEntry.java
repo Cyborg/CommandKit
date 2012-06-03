@@ -26,7 +26,7 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
-@Table(name = "tell")
+@Table("tell")
 public class TellEntry {
 	@Id
 	private int id;
