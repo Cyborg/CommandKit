@@ -58,6 +58,12 @@ public class TwitterCommands {
 			.appendMinutes().appendSuffix(" minutes").appendSeparator(", ")
 			.appendSeconds().appendSuffix(" seconds")
 			.toFormatter();
+	private static final PeriodFormatter longTimeFormatter = new PeriodFormatterBuilder()
+			.appendYears().appendSuffix(" years").appendSeparator(", ")
+			.appendMonths().appendSuffix(" months").appendSeparator(", ")
+			.appendWeeks().appendSuffix(" weeks").appendSeparator(", ")
+			.appendDays().appendSuffix(" days").appendSeparator(", ")
+			.toFormatter();
 	private static final String lineBreak = System.getProperty("line.separator");
 	private final Map<String, RequestToken> tokenMap = new HashMap<String, RequestToken>();
 	private final ConfigurationBuilder defaultConfigBuilder = new ConfigurationBuilder();
@@ -94,7 +100,15 @@ public class TwitterCommands {
 			Status status = statusList.get(0);
 			status.getUser();
 			StringBuilder builder = new StringBuilder();
-			builder.append(status.getUser().getScreenName()).append(Colors.BLUE).append(": ").append(Colors.NORMAL).append(status.getText()).append(" (").append(timeFormatter.print(new Period(new DateTime(status.getCreatedAt()), new DateTime()))).append(")");
+			builder.append(status.getUser().getScreenName()).append(Colors.BLUE).append(": ").append(Colors.NORMAL).append(status.getText()).append(" (");
+
+			Period period = new Period(new DateTime(status.getCreatedAt()), new DateTime());
+			if (period.getWeeks() > 2 || period.getMonths() > 1 || period.getYears() > 1) {
+				builder.append(longTimeFormatter.print(period));
+			} else {
+				builder.append(timeFormatter.print(period));
+			}
+			builder.append(")");
 			return get(ReturnType.MESSAGE, builder.toString().replace(lineBreak, " "), source, context);
 		} catch (TwitterException e) {
 			if (e.getStatusCode() == 404) {
