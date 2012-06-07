@@ -32,7 +32,7 @@ import org.pircbotx.User;
 public class SeenEntry {
 
 	@Id
-	private int id;
+	private long id;
 
 	@Field
 	private String name;
@@ -60,7 +60,7 @@ public class SeenEntry {
 			.appendSeconds().appendSuffix(" seconds")
 			.toFormatter();
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

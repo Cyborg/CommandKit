@@ -29,7 +29,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 @Table("tell")
 public class TellEntry {
 	@Id
-	private int id;
+	private long id;
 
 	@Field
 	private String receiver;
@@ -60,7 +60,7 @@ public class TellEntry {
 			.appendSeconds().appendSuffix(" seconds")
 			.toFormatter();
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
