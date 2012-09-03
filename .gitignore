@@ -53,6 +53,7 @@ build
 dist
 nbproject
 build.xml
+nbactions.xml
 
 # IntelliJ IDEA files #
 #######################

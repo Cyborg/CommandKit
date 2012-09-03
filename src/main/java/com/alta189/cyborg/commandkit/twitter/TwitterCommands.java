@@ -31,7 +31,6 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.pircbotx.Colors;
-import org.pircbotx.UserSnapshot;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
