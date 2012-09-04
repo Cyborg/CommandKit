@@ -33,13 +33,13 @@ import com.alta189.cyborg.commandkit.tell.TellEntry;
 import com.alta189.cyborg.commandkit.tell.TellListener;
 import com.alta189.cyborg.commandkit.twitter.TwitterCommands;
 import com.alta189.cyborg.commandkit.twitter.TwitterUser;
+import com.alta189.cyborg.commandkit.wolframalpha.WolframAlphaCommands;
 import com.alta189.simplesave.Database;
 import com.alta189.simplesave.DatabaseFactory;
 import com.alta189.simplesave.exceptions.ConnectionException;
 import com.alta189.simplesave.exceptions.TableRegistrationException;
 import com.alta189.simplesave.mysql.MySQLConfiguration;
 import com.alta189.simplesave.mysql.MySQLConstants;
-import twitter4j.Twitter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -91,6 +91,7 @@ public class CommandKit extends CommonPlugin {
 		getCyborg().getCommandManager().registerCommands(this, TellCommands.class, EmptyConstructorInjector.getInstance());
 		getCyborg().getCommandManager().registerCommands(this, HastebinCommands.class, EmptyConstructorInjector.getInstance());
 		getCyborg().getCommandManager().registerCommands(this, TwitterCommands.class, new SimpleInjector(getConfig().getString("twitter.consumer-key", "TSWAxMy4WyUYriBsAsO7zw"), getConfig().getString("twitter.consumer-secret", "HFQa8CjbZSOV9sVT0wgnOzsBIWfnOWmoTprwCX6q0")));
+		getCyborg().getCommandManager().registerCommands(this, WolframAlphaCommands.class, EmptyConstructorInjector.getInstance());
 		getLogger().log(Level.INFO, "Successfully Enabled!");
 	}
 
